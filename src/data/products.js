@@ -1,4 +1,6 @@
-import heroImg from "../assets/hero-img.jpg";
+// import heroImg from "../assets/hero-img.jpg";
+import heroImg from "../assets/foods/jollof-rice.jpeg";
+
 
 const soups = [
   "Ogbono Soup",

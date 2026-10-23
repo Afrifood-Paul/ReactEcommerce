@@ -4,7 +4,8 @@ import { Link, useLocation } from "react-router-dom";
 import { products, categories } from "./data/products";
 import { business } from "./data/business";
 import logo from "./assets/logo.png";
-import heroImg from "./assets/hero-img.jpg";
+// import heroImg from "./assets/hero-img.jpg";
+import heroImg from "./assets/foods/ogbono.jpeg";
 import "./App.css";
 
 const WA = `https://wa.me/${business.phoneHref.replace("+", "")}`;
