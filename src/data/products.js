@@ -1,6 +1,22 @@
-// import heroImg from "../assets/hero-img.jpg";
 import heroImg from "../assets/foods/jollof-rice.jpeg";
-
+import afang from "../assets/foods/Afang.jpeg";
+import beans from "../assets/foods/Beans.jpeg";
+import bitterleaf from "../assets/foods/bitterleaf.jpeg";
+import chickenPie from "../assets/foods/ChickenPie.jpeg";
+import coconutRice from "../assets/foods/coconutrice.jpeg";
+import edikaikong from "../assets/foods/Edikaikong.jpeg";
+import efoRiro from "../assets/foods/EfoRiro.jpeg";
+import egusi from "../assets/foods/egusi.jpeg";
+import fishermanSoup from "../assets/foods/FishermanSoup.jpeg";
+import friedRice from "../assets/foods/friedRice.jpeg";
+import isiEwu from "../assets/foods/Iseewu.jpeg";
+import moiMoi from "../assets/foods/moimoi.jpeg";
+import ogbono from "../assets/foods/ogbono.jpeg";
+import okroSoup from "../assets/foods/okroSoup.jpeg";
+import pepperedTurkey from "../assets/foods/pepperedTurkey.jpeg";
+import pepperSoup from "../assets/foods/peppersoup.jpeg";
+import stewedTurkey from "../assets/foods/stewedTuckey.jpeg";
+import whiteSoup from "../assets/foods/whitesoup.jpeg";
 
 const soups = [
   "Ogbono Soup",
@@ -40,12 +56,33 @@ const foods = [
   ].map((name) => ({ name, category: "Proteins & Specialties" })),
   { name: "Chicken Pie", category: "Pastries" },
 ];
+const imageByProduct = {
+  "Jollof Rice": heroImg,
+  "Coconut Rice": coconutRice,
+  "Fried Rice": friedRice,
+  "Nigerian-Style Beans": beans,
+  "Moi Moi": moiMoi,
+  "Ogbono Soup": ogbono,
+  "Egusi Soup": egusi,
+  "Bitterleaf Soup (Ofe Onugbu)": bitterleaf,
+  "Fisherman Soup": fishermanSoup,
+  "White Soup (Ofe Nsala)": whiteSoup,
+  "Afang Soup": afang,
+  "Efo Riro": efoRiro,
+  Edikaikong: edikaikong,
+  "Okro Soup": okroSoup,
+  "Stewed Turkey": stewedTurkey,
+  "Peppered Turkey": pepperedTurkey,
+  "Isi Ewu": isiEwu,
+  "Pepper Soup": pepperSoup,
+  "Chicken Pie": chickenPie,
+};
 export const products = foods.map((item, index) => ({
   id: `food-${index + 1}`,
   ...item,
   price: null,
-  image: heroImg,
-  imageAlt: "A selection of Nigerian dishes",
+  image: imageByProduct[item.name] || heroImg,
+  imageAlt: item.name,
   description: "Please contact us to confirm details and availability.",
   available: "Confirm availability",
 }));
