@@ -28,7 +28,7 @@ const soups = [
   "Efo Riro",
   "Edikaikong",
   "Okro Soup",
-  "Seafood Okra",
+  // "Seafood Okra",
 ];
 const foods = [
   ...[
@@ -50,8 +50,8 @@ const foods = [
     "Stewed Turkey",
     "Peppered Turkey",
     "Isi Ewu",
-    "Nkwobi",
-    "Asun",
+    // "Nkwobi",
+    // "Asun",
     "Pepper Soup",
   ].map((name) => ({ name, category: "Proteins & Specialties" })),
   { name: "Chicken Pie", category: "Pastries" },
