@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { products, categories } from "./data/products";
 import { business } from "./data/business";
@@ -157,14 +157,14 @@ function FoodCard({ item, add }) {
         </b>
       </div>
       <div className="card-bottom">
-        <small>{item.available}</small>
+        <small className="availability-label">{item.available}</small>
         {item.options ? (
           <Link className="text-button" to={`/menu?item=${encodeURIComponent(item.id)}`}>
             Choose portion <span>＋</span>
           </Link>
         ) : (
           <button className="text-button" onClick={() => add(item)}>
-            Add to cart <span>＋</span>
+            Add to Cart <span>＋</span>
           </button>
         )}
       </div>
@@ -193,12 +193,12 @@ function Home({ add }) {
               Explore our menu <span>↗</span>
             </Link>
             <a
-              className="button outline"
+              className="button outline "
               href={WA}
               target="_blank"
               rel="noreferrer"
             >
-              Order on WhatsApp
+              Order on WhatsApp 
             </a>
           </div>
           <div className="hero-meta">
@@ -228,7 +228,7 @@ function Home({ add }) {
               Made for the <em>table.</em>
             </h2>
           </div>
-          <Link className="arrow-link" to="/menu">
+          <Link className="arrow-link prominent-link" to="/menu">
             Explore all dishes <span>↗</span>
           </Link>
         </div>
@@ -385,7 +385,7 @@ function Menu({ add }) {
                   setDetail(null);
                 }}
               >
-                Add to cart
+                Add to Cart
               </button>
             </div>
           </div>
@@ -843,6 +843,8 @@ function Contact() {
 
 export default function App() {
   const location = useLocation();
+  const [cartNotice, setCartNotice] = useState("");
+  const noticeTimer = useRef(null);
   const [cart, setCart] = useState(() => {
     try {
       return JSON.parse(localStorage.getItem("joys-cart") || "[]");
@@ -853,6 +855,7 @@ export default function App() {
   useEffect(() => {
     localStorage.setItem("joys-cart", JSON.stringify(cart));
   }, [cart]);
+  useEffect(() => () => window.clearTimeout(noticeTimer.current), []);
   const count = cart.reduce((n, x) => n + x.qty, 0);
   function add(product, option = "") {
     const key = `${product.id}:${option || "default"}`;
@@ -862,6 +865,9 @@ export default function App() {
         ? old.map((x) => (x.key === key ? { ...x, qty: x.qty + 1 } : x))
         : [...old, { key, product, option, qty: 1 }];
     });
+    setCartNotice(`${product.name} added to cart`);
+    window.clearTimeout(noticeTimer.current);
+    noticeTimer.current = window.setTimeout(() => setCartNotice(""), 2200);
   }
   function update(key, qty) {
     if (qty < 1) return;
@@ -886,6 +892,7 @@ export default function App() {
       <Header count={count} />
       {page}
       <Footer />
+      {cartNotice && <div className="cart-notice" role="status" aria-live="polite">{cartNotice}</div>}
       <a
         className="floating-wa"
         href={WA}
